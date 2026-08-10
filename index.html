@@ -642,6 +642,59 @@
         word-break: break-word !important;
       }
 
+      /* Dashboard Mobile List Rows */
+      .dash-item-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        background: var(--card-bg);
+        transition: background 0.15s;
+      }
+      .dash-item-row:last-child {
+        border-bottom: none;
+      }
+      .dash-item-row:hover {
+        background: var(--bg);
+      }
+      .dash-item-main {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+        flex: 1;
+        padding-right: 10px;
+      }
+      .dash-item-id {
+        font-family: monospace;
+        font-weight: 700;
+        font-size: 0.9em;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .dash-item-sub {
+        font-size: 0.82em;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .dash-item-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .dash-item-amount {
+        font-weight: 700;
+        font-size: 0.88em;
+        color: var(--text);
+      }
+
       /* Responsive Chart Containers on Mobile */
       .chart-container {
         position: relative !important;

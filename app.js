@@ -440,20 +440,22 @@ async function renderRecentOrders(orders) {
   const customers = await DB.getCustomers();
   const cMap = Object.fromEntries(customers.map(c => [c.id, c]));
   const recent = orders.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 5);
-  document.getElementById('recent-orders-table').innerHTML = `
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Batch ID</th><th>Customer</th><th>Status</th><th>Total</th></tr></thead>
-        <tbody>
-          ${recent.map(o => `<tr>
-            <td style="font-family:monospace;font-weight:700;font-size:0.85em;">${o.batch_id}</td>
-            <td>${getOrderCustomerName(o, cMap)}</td>
-            <td>${statusBadge(o.status)}</td>
-            <td>${formatCurrency(o.total_amount)}</td>
-          </tr>`).join('') || `<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:20px;">No orders yet</td></tr>`}
-        </tbody>
-      </table>
-    </div>`;
+  document.getElementById('recent-orders-table').innerHTML = recent.length
+    ? `<div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card-bg);">
+        ${recent.map(o => `
+          <div class="dash-item-row" onclick="viewOrderDetails('${o.id}')" style="cursor:pointer;">
+            <div class="dash-item-main">
+              <div class="dash-item-id">${o.batch_id}</div>
+              <div class="dash-item-sub">${getOrderCustomerName(o, cMap)}</div>
+            </div>
+            <div class="dash-item-side">
+              <div class="dash-item-amount">${formatCurrency(o.total_amount)}</div>
+              <div>${statusBadge(o.status)}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`
+    : `<div style="text-align:center;color:var(--text-muted);padding:24px;border:1px solid var(--border);border-radius:12px;">No orders yet</div>`;
 }
 
 async function renderUnpaidInvoices(invoices) {
@@ -461,22 +463,25 @@ async function renderUnpaidInvoices(invoices) {
   const oMap = Object.fromEntries(orders.map(o => [o.id, o]));
   const cMap = Object.fromEntries(customers.map(c => [c.id, c]));
   const unpaid = invoices.filter(i => i.paid_status !== 'Paid').slice(0, 5);
-  document.getElementById('unpaid-invoices-table').innerHTML = `
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Invoice</th><th>Customer</th><th>Balance</th></tr></thead>
-        <tbody>
-          ${unpaid.map(inv => {
-            const o = oMap[inv.order_id]; const c = o ? cMap[o.customer_id] : null;
-            return `<tr>
-              <td style="font-weight:700;">${inv.invoice_number}</td>
-              <td>${o ? getOrderCustomerName(o, cMap) : '—'}</td>
-              <td style="color:var(--danger);font-weight:700;">${formatCurrency(inv.balance)}</td>
-            </tr>`;
-          }).join('') || `<tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:20px;">All paid!</td></tr>`}
-        </tbody>
-      </table>
-    </div>`;
+  document.getElementById('unpaid-invoices-table').innerHTML = unpaid.length
+    ? `<div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card-bg);">
+        ${unpaid.map(inv => {
+          const o = oMap[inv.order_id];
+          return `
+            <div class="dash-item-row" onclick="viewInvoiceDetails('${inv.id}')" style="cursor:pointer;">
+              <div class="dash-item-main">
+                <div class="dash-item-id" style="color:var(--primary);">${inv.invoice_number}</div>
+                <div class="dash-item-sub">${o ? getOrderCustomerName(o, cMap) : '—'}</div>
+              </div>
+              <div class="dash-item-side">
+                <div class="dash-item-amount" style="color:var(--danger);">${formatCurrency(inv.balance)}</div>
+                <div><span class="badge badge-red">Unpaid</span></div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>`
+    : `<div style="text-align:center;color:var(--text-muted);padding:24px;border:1px solid var(--border);border-radius:12px;">All paid!</div>`;
 }
 
 // ─────────────────────────────────────────────
