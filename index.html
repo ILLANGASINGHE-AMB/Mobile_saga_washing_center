@@ -2,7 +2,7 @@
 <html lang="en" class="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Sagacious Washing Center</title>
   <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -402,12 +402,221 @@
     .invoice-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
     .paid-stamp { position: absolute; top: 50px; right: 50px; border: 4px solid green; color: green; font-size: 3em; font-weight: 900; transform: rotate(-20deg); padding: 8px 18px; border-radius: 8px; opacity: 0.5; text-transform: uppercase; }
 
-    /* Responsive */
+    /* Mobile Bottom Navigation Bar */
+    #mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+      z-index: 990;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px;
+    }
+    .mnav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 0.72em;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      height: 100%;
+      transition: all 0.2s;
+    }
+    .mnav-btn i {
+      font-size: 1.25em;
+      transition: transform 0.2s;
+    }
+    .mnav-btn.active {
+      color: var(--primary);
+    }
+    .mnav-btn.active i {
+      transform: translateY(-2px) scale(1.1);
+    }
+    html.dark .mnav-btn.active {
+      color: var(--accent);
+    }
+
+    /* Mobile More Sheet */
+    .mobile-more-sheet {
+      background: var(--card-bg);
+      width: 100%;
+      max-height: 85vh;
+      border-radius: 24px 24px 0 0;
+      padding: 20px 18px;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: mobileSheetSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+    .mobile-more-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .mobile-more-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mobile-more-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 4px 0;
+    }
+    @media (max-width: 380px) {
+      .mobile-more-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .mmode-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.78em;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .mmode-card:active {
+      transform: scale(0.96);
+      background: var(--border);
+    }
+    .mmode-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    @keyframes mobileSheetSlideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    /* Responsive & Mobile Optimization */
     @media (max-width: 768px) {
-      #sidebar { width: 64px; }
-      #sidebar .sidebar-logo .logo-text, #sidebar nav a span, #sidebar .sidebar-footer button span { display: none; }
-      #main { margin-left: 64px; }
-      #content { padding: 14px; }
+      #sidebar { display: none !important; }
+      #main { margin-left: 0 !important; width: 100% !important; padding-bottom: 76px; }
+      #content { padding: 14px 12px; }
+      #mobile-bottom-nav { display: flex; }
+
+      /* Topbar Mobile Adjustments */
+      #topbar { padding: 0 14px; height: 56px; }
+      #topbar h1 { font-size: 1.05em; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #global-search-bar { max-width: 140px; margin: 0 8px; }
+
+      /* Toast Mobile */
+      #toast-container { top: 10px; left: 10px; right: 10px; }
+      .toast { min-width: auto; width: 100%; }
+
+      /* Mobile Dialogs / Modals */
+      .modal-overlay {
+        padding: 0 !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+      }
+      .modal, .modal-lg, .modal-xl {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 24px 24px 0 0 !important;
+        margin: 0 !important;
+        padding: 18px 16px !important;
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.3) !important;
+        animation: mobileSheetSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+
+      /* Tailwind fixed modal containers for Transport / Expenses */
+      div[id$="-modal"].fixed.inset-0 {
+        padding: 0 !important;
+        align-items: flex-end !important;
+      }
+      div[id$="-modal"].fixed.inset-0 > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 24px 24px 0 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Sticky Modal Headers & Footers */
+      .modal-header {
+        position: sticky;
+        top: -18px;
+        z-index: 30;
+        background: var(--card-bg);
+        margin: -18px -16px 14px -16px;
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .modal-close {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Touch Inputs & Selects */
+      .form-input, .form-select {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+
+      /* Cards & Grids on Mobile */
+      .card { padding: 16px; border-radius: 14px; }
+      .grid { grid-template-columns: 1fr !important; }
+      .stat-card { padding: 16px; }
+
+      /* Responsive Tables */
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+      /* Gemini FAB & Drawer Mobile */
+      .gemini-fab {
+        bottom: 76px !important;
+        right: 16px !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 18px !important;
+      }
+      .gemini-drawer {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        right: -100vw !important;
+      }
+      .gemini-drawer.open {
+        right: 0 !important;
+      }
     }
 
     /* Dark mode overrides */
@@ -810,6 +1019,120 @@
 
     <div id="gemini-fab" class="gemini-fab" onclick="toggleGeminiDrawer()" title="Ask Gemini AI">
       <i class="fas fa-wand-magic-sparkles"></i>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav id="mobile-bottom-nav">
+      <button onclick="mobileNavTo('dashboard')" id="mnav-dashboard" class="mnav-btn">
+        <i class="fas fa-chart-pie"></i>
+        <span>Home</span>
+      </button>
+      <button onclick="mobileNavTo('transport')" id="mnav-transport" class="mnav-btn">
+        <i class="fas fa-truck-fast"></i>
+        <span>Transport</span>
+      </button>
+      <button onclick="mobileNavTo('orders')" id="mnav-orders" class="mnav-btn">
+        <i class="fas fa-boxes-stacked"></i>
+        <span>Orders</span>
+      </button>
+      <button onclick="mobileNavTo('customers')" id="mnav-customers" class="mnav-btn">
+        <i class="fas fa-hotel"></i>
+        <span>Customers</span>
+      </button>
+      <button onclick="openMobileMoreMenu()" id="mnav-more" class="mnav-btn">
+        <i class="fas fa-bars"></i>
+        <span>More</span>
+      </button>
+    </nav>
+
+    <!-- Mobile "More" Slide-up Sheet -->
+    <div id="mobile-more-overlay" class="modal-overlay" style="display:none; z-index:9998;" onclick="closeMobileMoreMenu()">
+      <div class="mobile-more-sheet" onclick="event.stopPropagation()">
+        <div class="mobile-more-header">
+          <div class="mobile-more-title">
+            <i class="fas fa-th-large" style="color:var(--accent);"></i>
+            <span>System Modules & Menu</span>
+          </div>
+          <button class="modal-close" onclick="closeMobileMoreMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="mobile-more-grid">
+          <!-- Dashboard / Home -->
+          <a href="#" onclick="mobileMoreSelect('dashboard')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"><i class="fas fa-chart-pie"></i></div>
+            <span>Dashboard</span>
+          </a>
+          <!-- Customers -->
+          <a href="#" onclick="mobileMoreSelect('customers')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#10b981,#047857);"><i class="fas fa-hotel"></i></div>
+            <span>Customers</span>
+          </a>
+          <!-- Transport -->
+          <a href="#" onclick="mobileMoreSelect('transport')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-truck-fast"></i></div>
+            <span>Transport</span>
+          </a>
+          <!-- Orders -->
+          <a href="#" onclick="mobileMoreSelect('orders')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);"><i class="fas fa-boxes-stacked"></i></div>
+            <span>Orders</span>
+          </a>
+          <!-- Pay Now -->
+          <a href="#" onclick="mobileMoreSelect('paynow')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490);"><i class="fas fa-money-bill-wave"></i></div>
+            <span>Pay Now</span>
+          </a>
+          <!-- Invoices -->
+          <a href="#" onclick="mobileMoreSelect('invoices')" class="mmode-card" id="mmode-invoices">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#ec4899,#be185d);"><i class="fas fa-file-invoice"></i></div>
+            <span>Invoices</span>
+          </a>
+          <!-- Deductions -->
+          <a href="#" onclick="mobileMoreSelect('deductions')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#f97316,#c2410c);"><i class="fas fa-scissors"></i></div>
+            <span>Deductions</span>
+          </a>
+          <!-- Items -->
+          <a href="#" onclick="mobileMoreSelect('items')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#6366f1,#4338ca);"><i class="fas fa-list-check"></i></div>
+            <span>Items</span>
+          </a>
+          <!-- Expenses -->
+          <a href="#" onclick="mobileMoreSelect('expenses')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#14b8a6,#0f766e);"><i class="fas fa-receipt"></i></div>
+            <span>Expenses</span>
+          </a>
+          <!-- Drivers -->
+          <a href="#" onclick="mobileMoreSelect('drivers')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#64748b,#334155);"><i class="fas fa-truck"></i></div>
+            <span>Drivers</span>
+          </a>
+          <!-- Data Analytics -->
+          <a href="#" onclick="mobileMoreSelect('analytics')" class="mmode-card" id="mmode-analytics">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#3b82f6,#1e40af);"><i class="fas fa-chart-line"></i></div>
+            <span>Analytics</span>
+          </a>
+          <!-- Reports -->
+          <a href="#" onclick="mobileMoreSelect('reports')" class="mmode-card" id="mmode-reports">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#8b5cf6,#4c1d95);"><i class="fas fa-chart-bar"></i></div>
+            <span>Reports</span>
+          </a>
+          <!-- Recent Actions -->
+          <a href="#" onclick="mobileMoreSelect('recent-actions')" class="mmode-card" id="mmode-recent-actions">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#a855f7,#7e22ce);"><i class="fas fa-history"></i></div>
+            <span>Audit Log</span>
+          </a>
+          <!-- Settings -->
+          <a href="#" onclick="mobileMoreSelect('settings')" class="mmode-card">
+            <div class="mmode-icon" style="background:linear-gradient(135deg,#475569,#1e293b);"><i class="fas fa-cog"></i></div>
+            <span>Settings</span>
+          </a>
+        </div>
+        <div style="margin-top:8px;">
+          <button onclick="doLogout(); closeMobileMoreMenu();" class="btn btn-danger" style="width:100%; justify-content:center; padding:12px; font-size:0.95em;">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

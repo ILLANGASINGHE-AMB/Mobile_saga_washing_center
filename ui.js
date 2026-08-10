@@ -169,13 +169,13 @@ function confirmDialog(message,onConfirm,confirmLabel='Confirm',danger=true) {
   overlay.className='modal-overlay';
   overlay.id='confirm-modal';
   overlay.style.cssText='z-index:9000;display:flex;';
-  overlay.innerHTML=`<div class="modal" style="max-width:400px;" onclick="event.stopPropagation()">
-    <div style="text-align:center;padding:10px 0 20px;">
-      <div style="font-size:2.5em;color:#f59e0b;margin-bottom:14px;"><i class="fas fa-exclamation-triangle"></i></div>
-      <div style="font-size:1em;font-weight:600;margin-bottom:24px;line-height:1.5;">${message}</div>
-      <div style="display:flex;gap:12px;justify-content:center;">
-        <button class="btn btn-secondary" style="min-width:90px;" onclick="document.getElementById('confirm-modal').remove()">Cancel</button>
-        <button class="btn ${danger?'btn-danger':'btn-primary'}" style="min-width:90px;" id="confirm-ok-btn">${confirmLabel}</button>
+  overlay.innerHTML=`<div class="modal" style="max-width:420px;width:92%;" onclick="event.stopPropagation()">
+    <div style="text-align:center;padding:10px 0 10px;">
+      <div style="font-size:2.4em;color:#f59e0b;margin-bottom:12px;"><i class="fas fa-exclamation-triangle"></i></div>
+      <div style="font-size:1em;font-weight:600;margin-bottom:20px;line-height:1.5;">${message}</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-secondary" style="min-width:110px;min-height:44px;flex:1;justify-content:center;" onclick="document.getElementById('confirm-modal').remove()">Cancel</button>
+        <button class="btn ${danger?'btn-danger':'btn-primary'}" style="min-width:110px;min-height:44px;flex:1;justify-content:center;" id="confirm-ok-btn">${confirmLabel}</button>
       </div>
     </div>
   </div>`;

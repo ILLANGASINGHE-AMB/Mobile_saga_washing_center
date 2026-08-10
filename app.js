@@ -199,6 +199,8 @@ function navigate(page) {
     a.classList.toggle('active', a.dataset.page === page);
   });
 
+  updateMobileBottomNav(page);
+
   const titles = {
     dashboard: 'Dashboard', customers: 'Customers', drivers: 'Drivers', transport: 'Transport & Trip Management',
     orders: 'Orders', paynow: 'Pay Now', invoices: 'Invoices', payments: 'Payments',
@@ -225,6 +227,53 @@ function navigate(page) {
     'recent-actions': renderRecentActions
   };
   if (pages[page]) pages[page]();
+}
+
+function updateMobileBottomNav(page) {
+  document.querySelectorAll('#mobile-bottom-nav .mnav-btn').forEach(btn => btn.classList.remove('active'));
+  const mainTabs = ['dashboard', 'transport', 'orders', 'customers'];
+  if (mainTabs.includes(page)) {
+    const btn = document.getElementById('mnav-' + page);
+    if (btn) btn.classList.add('active');
+  } else {
+    const moreBtn = document.getElementById('mnav-more');
+    if (moreBtn) moreBtn.classList.add('active');
+  }
+}
+
+function openMobileMoreMenu() {
+  const overlay = document.getElementById('mobile-more-overlay');
+  if (!overlay) return;
+
+  const allowed = getRoleAllowedPages();
+  const pageMap = {
+    invoices: 'mmode-invoices',
+    analytics: 'mmode-analytics',
+    reports: 'mmode-reports',
+    'recent-actions': 'mmode-recent-actions'
+  };
+
+  Object.entries(pageMap).forEach(([pg, elementId]) => {
+    const el = document.getElementById(elementId);
+    if (el) el.style.display = allowed.includes(pg) ? 'flex' : 'none';
+  });
+
+  overlay.style.display = 'flex';
+}
+
+function closeMobileMoreMenu() {
+  const overlay = document.getElementById('mobile-more-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+function mobileMoreSelect(page) {
+  closeMobileMoreMenu();
+  navigate(page);
+}
+
+function mobileNavTo(page) {
+  closeMobileMoreMenu();
+  navigate(page);
 }
 
 function renderExpensesPage() {
