@@ -524,81 +524,178 @@
 
     /* Responsive & Mobile Optimization */
     @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
       #sidebar { display: none !important; }
-      #main { margin-left: 0 !important; width: 100% !important; padding-bottom: 76px; }
-      #content { padding: 14px 12px; }
-      #mobile-bottom-nav { display: flex; }
+      #main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+        padding-bottom: 76px !important;
+      }
+      #content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+      }
+      #mobile-bottom-nav { display: flex !important; }
 
-      /* Topbar Mobile Adjustments */
-      #topbar { padding: 0 14px; height: 56px; }
-      #topbar h1 { font-size: 1.05em; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      #global-search-bar { max-width: 140px; margin: 0 8px; }
+      /* Topbar Clean Mobile Header Fix */
+      #topbar {
+        padding: 0 12px !important;
+        height: 54px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #topbar h1 {
+        font-size: 1.05em !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 160px !important;
+        margin: 0 !important;
+      }
+      #global-search-bar, #topbar-date {
+        display: none !important; /* Hide header search & date string on mobile to eliminate clutter */
+      }
+      .topbar-right {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+      }
+      .topbar-right button {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 0.85em !important;
+        border-radius: 10px !important;
+      }
+      .topbar-avatar {
+        padding: 4px 10px !important;
+        font-size: 0.72em !important;
+        border-radius: 8px !important;
+      }
+
+      /* Force 100% Full-Width Mobile Grid & Card Layouts */
+      .grid, [class*="grid-cols-"], .page-content > div {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        gap: 12px !important;
+      }
+      .card, .stat-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 16px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .stat-card .value {
+        font-size: 1.55em !important;
+        word-break: break-word !important;
+      }
+
+      /* Table Containers on Mobile */
+      .table-wrap, table {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .table-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      th, td {
+        white-space: nowrap !important;
+        padding: 10px 12px !important;
+        font-size: 0.82em !important;
+      }
 
       /* Toast Mobile */
       #toast-container { top: 10px; left: 10px; right: 10px; }
       .toast { min-width: auto; width: 100%; }
 
-      /* Mobile Dialogs / Modals */
-      .modal-overlay {
+      /* Mobile Dialogs / Modals (Higher Z-Index Than Bottom Nav) */
+      .modal-overlay, div[id$="-modal"].fixed.inset-0 {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 10000 !important; /* Above bottom nav! */
         padding: 0 !important;
+        background: rgba(15, 23, 42, 0.75) !important;
+        backdrop-filter: blur(4px) !important;
+        display: flex !important;
         align-items: flex-end !important;
         justify-content: center !important;
       }
-      .modal, .modal-lg, .modal-xl {
+      .modal, .modal-lg, .modal-xl, div[id$="-modal"].fixed.inset-0 > div {
         width: 100% !important;
         max-width: 100% !important;
-        max-height: 92vh !important;
+        max-height: 88vh !important;
         border-radius: 24px 24px 0 0 !important;
         margin: 0 !important;
-        padding: 18px 16px !important;
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.3) !important;
+        padding: 18px 16px 28px 16px !important;
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.35) !important;
         animation: mobileSheetSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      }
-
-      /* Tailwind fixed modal containers for Transport / Expenses */
-      div[id$="-modal"].fixed.inset-0 {
-        padding: 0 !important;
-        align-items: flex-end !important;
-      }
-      div[id$="-modal"].fixed.inset-0 > div {
-        width: 100% !important;
-        max-width: 100% !important;
-        max-height: 92vh !important;
-        border-radius: 24px 24px 0 0 !important;
-        margin: 0 !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
       }
 
       /* Sticky Modal Headers & Footers */
-      .modal-header {
-        position: sticky;
-        top: -18px;
-        z-index: 30;
-        background: var(--card-bg);
-        margin: -18px -16px 14px -16px;
-        padding: 16px;
-        border-bottom: 1px solid var(--border);
+      .modal-header, div[id$="-modal"] .flex.items-center.justify-between {
+        position: sticky !important;
+        top: -18px !important;
+        z-index: 30 !important;
+        background: var(--card-bg) !important;
+        margin: -18px -16px 14px -16px !important;
+        padding: 16px !important;
+        border-bottom: 1px solid var(--border) !important;
       }
       .modal-close {
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 38px !important;
+        height: 38px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      /* Sticky Modal Footer Action Buttons Container */
+      div[id$="-modal"] .flex.items-center.justify-end,
+      div[id$="-modal"] .flex.justify-end,
+      .modal-footer {
+        position: sticky !important;
+        bottom: -28px !important;
+        z-index: 30 !important;
+        background: var(--card-bg) !important;
+        margin: 16px -16px -28px -16px !important;
+        padding: 14px 16px !important;
+        border-top: 1px solid var(--border) !important;
+        display: flex !important;
+        gap: 10px !important;
       }
 
       /* Touch Inputs & Selects */
-      .form-input, .form-select {
+      .form-input, .form-select, input, select, textarea {
         font-size: 16px !important;
-        min-height: 44px;
+        min-height: 44px !important;
+        box-sizing: border-box !important;
       }
-
-      /* Cards & Grids on Mobile */
-      .card { padding: 16px; border-radius: 14px; }
-      .grid { grid-template-columns: 1fr !important; }
-      .stat-card { padding: 16px; }
-
-      /* Responsive Tables */
-      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
       /* Gemini FAB & Drawer Mobile */
       .gemini-fab {
@@ -613,6 +710,7 @@
         max-width: 100vw !important;
         height: 100vh !important;
         right: -100vw !important;
+        z-index: 10005 !important;
       }
       .gemini-drawer.open {
         right: 0 !important;
