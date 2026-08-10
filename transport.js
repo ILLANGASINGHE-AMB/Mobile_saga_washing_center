@@ -240,44 +240,44 @@ const TransportModule = {
 
     const html = `
       <div id="start-trip-modal" class="fixed inset-0 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-2xl max-w-lg w-full p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[90vh] flex flex-col">
+        <div class="bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-2xl max-w-lg w-full p-4 sm:p-5 shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[92vh] flex flex-col">
           <!-- Sticky Header -->
-          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 shrink-0">
-            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2.5 shrink-0">
+            <h3 class="text-base font-bold text-slate-800 dark:text-white flex items-center gap-2">
               <i class="fa-solid fa-play text-indigo-600"></i> Start New Trip (${tripId})
             </h3>
-            <button onclick="document.getElementById('start-trip-modal').remove()" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-base">
+            <button onclick="document.getElementById('start-trip-modal').remove()" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-base">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <!-- Form Body -->
-          <form onsubmit="TransportModule.saveStartTrip(event)" class="space-y-4 text-left overflow-y-auto flex-1 py-3 pr-1">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <form onsubmit="TransportModule.saveStartTrip(event)" class="space-y-3.5 text-left overflow-y-auto flex-1 py-3">
+            <div class="modal-form-grid grid grid-cols-2 gap-2.5">
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Trip ID</label>
-                <input type="text" value="${tripId}" readonly class="w-full px-3.5 py-2.5 text-sm font-mono bg-slate-100 dark:bg-slate-700 rounded-xl text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600" />
+                <input type="text" value="${tripId}" readonly class="w-full px-3 py-2 text-xs font-mono bg-slate-100 dark:bg-slate-700 rounded-xl text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600" />
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Driver Name *</label>
-                <input type="text" id="trip-driver-name" value="${currentDriver}" required class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-bold focus:ring-2 focus:ring-indigo-500" />
+                <input type="text" id="trip-driver-name" value="${currentDriver}" required class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-bold" />
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="modal-form-grid grid grid-cols-2 gap-2.5">
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Start Date *</label>
-                <input type="date" id="trip-start-date" value="${todayDate}" required class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-indigo-500" />
+                <input type="date" id="trip-start-date" value="${todayDate}" required class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600" />
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Start Time *</label>
-                <input type="text" id="trip-start-time" value="${defaultTime}" required class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-mono focus:ring-2 focus:ring-indigo-500" />
+                <input type="text" id="trip-start-time" value="${defaultTime}" required class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-mono" />
               </div>
             </div>
 
-            <div class="bg-indigo-50/70 dark:bg-indigo-950/40 p-3.5 rounded-xl border border-indigo-200 dark:border-indigo-800/50 space-y-1.5">
+            <div class="bg-indigo-50/80 dark:bg-indigo-950/40 p-3 rounded-xl border border-indigo-200 dark:border-indigo-800/60 space-y-1.5">
               <label class="block text-xs font-bold text-indigo-950 dark:text-indigo-200">Starting KM (Odometer Reading) *</label>
-              <input type="number" step="0.1" id="trip-starting-km" value="${defaultStartKm}" required placeholder="e.g. 45250" class="w-full px-3.5 py-2.5 text-base bg-white dark:bg-slate-700 rounded-xl text-indigo-600 dark:text-indigo-400 border border-indigo-300 dark:border-indigo-600 font-bold focus:ring-2 focus:ring-indigo-500" />
+              <input type="number" step="0.1" id="trip-starting-km" value="${defaultStartKm}" required placeholder="e.g. 45250" class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-700 rounded-lg text-indigo-700 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-600 font-bold" />
               <p class="text-[11px] text-indigo-700 dark:text-indigo-300 mt-1">
                 <i class="fa-solid fa-circle-info mr-1"></i>
                 ${defaultStartKm !== '' ? `Auto-filled from previous trip final KM (${defaultStartKm} KM). Editable if needed.` : 'Enter vehicle kilometre reading at start of trip.'}
@@ -285,9 +285,9 @@ const TransportModule = {
             </div>
 
             <!-- Sticky Footer Action Buttons -->
-            <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-700 shrink-0">
-              <button type="button" onclick="document.getElementById('start-trip-modal').remove()" class="flex-1 sm:flex-none px-4 py-3 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-700 text-center">Cancel</button>
-              <button type="submit" class="flex-1 sm:flex-none px-5 py-3 text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md flex items-center justify-center gap-2">
+            <div class="flex items-center justify-between gap-2.5 pt-3 border-t border-slate-200 dark:border-slate-700 shrink-0">
+              <button type="button" onclick="document.getElementById('start-trip-modal').remove()" class="px-4 py-2.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-700 text-center" style="flex:1;">Cancel</button>
+              <button type="submit" class="px-4 py-2.5 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm flex items-center justify-center gap-1.5" style="flex:2; white-space:nowrap;">
                 <i class="fa-solid fa-play"></i> Start Trip & Select Customers
               </button>
             </div>
@@ -529,21 +529,21 @@ const TransportModule = {
 
     const html = `
       <div id="end-trip-modal" class="fixed inset-0 z-[10000] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-2xl max-w-xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[90vh] flex flex-col">
+        <div class="bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-2xl max-w-xl w-full p-4 sm:p-5 shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[92vh] flex flex-col">
           <!-- Sticky Header -->
-          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 shrink-0">
-            <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2.5 shrink-0">
+            <h3 class="text-base font-bold text-slate-800 dark:text-white flex items-center gap-2">
               <i class="fa-solid fa-flag-checkered text-emerald-600"></i> Complete Trip (${trip.trip_id})
             </h3>
-            <button onclick="document.getElementById('end-trip-modal').remove()" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-base">
+            <button onclick="document.getElementById('end-trip-modal').remove()" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-base">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <!-- Form Body -->
-          <form onsubmit="TransportModule.saveEndTrip(event, '${trip.id}')" class="space-y-4 text-left overflow-y-auto flex-1 py-3 pr-1">
+          <form onsubmit="TransportModule.saveEndTrip(event, '${trip.id}')" class="space-y-3.5 text-left overflow-y-auto flex-1 py-3">
             <!-- Trip Overview Banner -->
-            <div class="bg-slate-100 dark:bg-slate-700/50 p-3.5 rounded-xl text-xs space-y-1.5 border border-slate-200 dark:border-slate-600">
+            <div class="bg-slate-100 dark:bg-slate-700/50 p-3 rounded-xl text-xs space-y-1 border border-slate-200 dark:border-slate-600">
               <div class="flex items-center justify-between text-slate-700 dark:text-slate-200 font-semibold">
                 <span><i class="fa-solid fa-user-circle text-slate-400 mr-1"></i> Driver: <strong>${trip.driver_name}</strong></span>
                 <span>Start KM: <strong class="text-indigo-600 dark:text-indigo-400 font-mono text-sm">${trip.starting_km} KM</strong></span>
@@ -554,7 +554,7 @@ const TransportModule = {
             </div>
 
             <!-- Customer Visit Sequence Section -->
-            <div class="bg-indigo-50/70 dark:bg-indigo-950/40 p-3.5 rounded-xl border border-indigo-200 dark:border-indigo-800/50 space-y-3">
+            <div class="bg-indigo-50/70 dark:bg-indigo-950/40 p-3 rounded-xl border border-indigo-200 dark:border-indigo-800/50 space-y-2.5">
               <div class="flex items-center justify-between">
                 <label class="block text-xs font-bold text-indigo-900 dark:text-indigo-200">Visited Customers & Sequence Order:</label>
                 <button type="button" onclick="TransportModule.clearCustomerSequence()" class="text-[11px] font-semibold text-rose-600 dark:text-rose-400 hover:underline flex items-center gap-1">
@@ -563,53 +563,56 @@ const TransportModule = {
               </div>
 
               <!-- Sequence badges -->
-              <div id="cust-seq-badge-list" class="flex flex-wrap items-center gap-1.5 min-h-[30px]"></div>
+              <div id="cust-seq-badge-list" class="flex flex-wrap items-center gap-1.5 min-h-[28px]"></div>
 
               <!-- Customer Search Input -->
               <div class="relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-                <input type="text" id="cust-search-input" oninput="TransportModule.filterCustomerButtons(this.value)" placeholder="🔍 Search customer to add/update..." class="w-full pl-9 pr-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                <input type="text" id="cust-search-input" oninput="TransportModule.filterCustomerButtons(this.value)" placeholder="🔍 Search customer to add/update..." class="w-full pl-8 pr-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-medium" />
               </div>
 
               <!-- Customer Buttons Grid -->
-              <div id="cust-buttons-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-44 overflow-y-auto border border-slate-200 dark:border-slate-700 p-2 rounded-xl bg-white dark:bg-slate-800">
+              <div id="cust-buttons-grid" class="modal-form-grid grid grid-cols-2 gap-2 max-h-36 overflow-y-auto border border-slate-200 dark:border-slate-700 p-2 rounded-xl bg-white dark:bg-slate-800">
                 ${this.renderCustomerButtonsHTML()}
               </div>
             </div>
 
             <!-- End Trip Readings -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="modal-form-grid grid grid-cols-2 gap-2.5">
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">End Date *</label>
-                <input type="date" id="trip-end-date" value="${todayDate}" required class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-emerald-500" />
+                <input type="date" id="trip-end-date" value="${todayDate}" required class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600" />
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">End Time *</label>
-                <input type="text" id="trip-end-time" value="${defaultEndTime}" required class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-mono focus:ring-2 focus:ring-emerald-500" />
+                <input type="text" id="trip-end-time" value="${defaultEndTime}" required class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 font-mono" />
               </div>
             </div>
 
-            <div class="bg-emerald-50/70 dark:bg-emerald-950/40 p-3.5 rounded-xl border border-emerald-200 dark:border-emerald-800/50 space-y-2">
-              <label class="block text-xs font-bold text-emerald-950 dark:text-emerald-200">Final KM (Odometer Reading) *</label>
-              <input type="number" step="0.1" id="trip-final-km" required min="${trip.starting_km}" placeholder="Must be >= ${trip.starting_km}" oninput="TransportModule.calcDistancePreview(${trip.starting_km})" class="w-full px-3.5 py-2.5 text-base bg-white dark:bg-slate-700 rounded-xl text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-600 font-bold focus:ring-2 focus:ring-emerald-500" />
+            <!-- Final KM & Live Distance Highlight Box -->
+            <div class="bg-emerald-50/80 dark:bg-emerald-950/40 p-3 rounded-xl border border-emerald-200 dark:border-emerald-800/60 space-y-2">
+              <div>
+                <label class="block text-xs font-bold text-emerald-950 dark:text-emerald-200 mb-1">Final KM (Odometer Reading) *</label>
+                <input type="number" step="0.1" id="trip-final-km" required min="${trip.starting_km}" placeholder="Must be >= ${trip.starting_km}" oninput="TransportModule.calcDistancePreview(${trip.starting_km})" class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-lg text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-600 font-bold" />
+              </div>
               
               <!-- Live Distance Calculation Box -->
-              <div id="distance-preview-box" class="pt-1 flex items-center justify-between text-xs">
-                <span class="font-semibold text-emerald-800 dark:text-emerald-300">Calculated Distance Travelled:</span>
-                <span id="distance-val-text" class="text-base font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0 KM</span>
+              <div id="distance-preview-box" class="pt-1.5 flex items-center justify-between text-xs border-t border-emerald-200/60 dark:border-emerald-800/60">
+                <span class="font-bold text-emerald-800 dark:text-emerald-300"><i class="fa-solid fa-gauge-high mr-1"></i> Distance Travelled:</span>
+                <span id="distance-val-text" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0 KM</span>
               </div>
             </div>
 
             <!-- Optional Trip Notes -->
             <div>
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Trip Notes (Optional)</label>
-              <textarea id="trip-notes-input" rows="2" placeholder="Optional final trip remarks..." class="w-full px-3.5 py-2.5 text-sm bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-indigo-500">${trip.notes || ''}</textarea>
+              <textarea id="trip-notes-input" rows="2" placeholder="Optional final trip remarks..." class="w-full px-3 py-2 text-xs bg-white dark:bg-slate-700 rounded-xl text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600">${trip.notes || ''}</textarea>
             </div>
 
             <!-- Sticky Footer Action Buttons -->
-            <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-700 shrink-0">
-              <button type="button" onclick="document.getElementById('end-trip-modal').remove()" class="flex-1 sm:flex-none px-4 py-3 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-700 text-center">Cancel</button>
-              <button type="submit" class="flex-1 sm:flex-none px-5 py-3 text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-md flex items-center justify-center gap-2">
+            <div class="flex items-center justify-between gap-2.5 pt-3 border-t border-slate-200 dark:border-slate-700 shrink-0">
+              <button type="button" onclick="document.getElementById('end-trip-modal').remove()" class="px-4 py-2.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-700 text-center" style="flex:1;">Cancel</button>
+              <button type="submit" class="px-4 py-2.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-sm flex items-center justify-center gap-1.5" style="flex:2; white-space:nowrap;">
                 <i class="fa-solid fa-flag-checkered"></i> Complete & Save Trip
               </button>
             </div>
