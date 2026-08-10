@@ -112,7 +112,7 @@ const TransportModule = {
     if (trips.length === 0) {
       rowsHTML = `
         <tr>
-          <td colspan="7" class="px-4 py-8 text-center text-xs text-slate-400">
+          <td colspan="5" class="px-4 py-8 text-center text-xs text-slate-400">
             No vehicle trips recorded yet. Click <strong>"New Trip"</strong> above to start a trip.
           </td>
         </tr>
@@ -120,17 +120,6 @@ const TransportModule = {
     } else {
       trips.forEach(t => {
         const isCompleted = t.status === 'Completed';
-
-        // Render customer visit order badges
-        let customersHTML = '<span class="text-slate-400 text-[11px]">No customers selected</span>';
-        if (t.selected_customers && t.selected_customers.length > 0) {
-          customersHTML = t.selected_customers.map(c => `
-            <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 rounded-md text-[11px] font-semibold border border-indigo-200 dark:border-indigo-800/50 my-0.5">
-              <span class="w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[9px] font-bold">${c.visit_order}</span>
-              ${c.hotel_name}
-            </span>
-          `).join(' ');
-        }
 
         const distanceDisplay = isCompleted ? `
           <div class="font-extrabold text-slate-800 dark:text-white text-xs">${t.distance_km || 0} KM</div>
@@ -176,26 +165,17 @@ const TransportModule = {
             <td class="px-4 py-3 text-xs font-mono font-extrabold text-indigo-600 dark:text-indigo-400 whitespace-nowrap">
               ${t.trip_id}
             </td>
-            <td class="px-4 py-3 text-xs font-bold text-slate-800 dark:text-white whitespace-nowrap">
-              <i class="fa-solid fa-user-circle text-slate-400 mr-1"></i> ${t.driver_name || 'Driver'}
-            </td>
             <td class="px-4 py-3 text-xs text-slate-600 dark:text-slate-300 whitespace-nowrap font-mono">
               <div>${t.start_date}</div>
               <div class="text-[10px] text-slate-400">${t.start_time}</div>
-            </td>
-            <td class="px-4 py-3 text-xs">
-              <div class="flex flex-wrap items-center gap-1 max-w-xs sm:max-w-md">
-                ${customersHTML}
-              </div>
-              ${t.notes ? `<div class="text-[10px] text-slate-400 italic mt-1"><i class="fa-solid fa-note-sticky mr-1"></i>${t.notes}</div>` : ''}
-            </td>
-            <td class="px-4 py-3 text-xs text-center whitespace-nowrap">
-              ${distanceDisplay}
             </td>
             <td class="px-4 py-3 text-xs text-center whitespace-nowrap">
               <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isCompleted ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400 animate-pulse'}">
                 ${t.status}
               </span>
+            </td>
+            <td class="px-4 py-3 text-xs text-center whitespace-nowrap">
+              ${distanceDisplay}
             </td>
             <td class="px-4 py-3 text-xs text-center whitespace-nowrap">
               <div class="flex items-center justify-center gap-1.5">
@@ -214,20 +194,18 @@ const TransportModule = {
             <h2 class="text-base font-bold text-slate-800 dark:text-white flex items-center gap-2">
               <i class="fa-solid fa-truck text-indigo-500"></i> Vehicle Trips Register
             </h2>
-            <p class="text-xs text-slate-500">Complete trip lifecycle log with sequence order customer visits.</p>
+            <p class="text-xs text-slate-500">Complete trip lifecycle log with distance and status tracking.</p>
           </div>
         </div>
 
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse min-w-[700px]">
+          <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                 <th class="px-4 py-3">Trip ID</th>
-                <th class="px-4 py-3">Driver</th>
                 <th class="px-4 py-3">Start Date/Time</th>
-                <th class="px-4 py-3">Customer Visit Sequence</th>
-                <th class="px-4 py-3 text-center">Distance (KM)</th>
                 <th class="px-4 py-3 text-center">Status</th>
+                <th class="px-4 py-3 text-center">Distance Travelled</th>
                 <th class="px-4 py-3 text-center">Actions</th>
               </tr>
             </thead>
