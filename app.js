@@ -22,6 +22,7 @@ async function doLogin() {
     currentUser = { id: user.id, username: user.username, role: user.role, display_name: user.display_name || user.username };
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'flex';
+    window.scrollTo(0, 0);
 
     await DB.logAction('User Login', `User "${currentUser.display_name}" logged in successfully`, { username: user.username, role: user.role }, 'User');
 
@@ -200,6 +201,7 @@ function navigate(page) {
   });
 
   updateMobileBottomNav(page);
+  window.scrollTo(0, 0);
 
   const titles = {
     dashboard: 'Dashboard', customers: 'Customers', drivers: 'Drivers', transport: 'Transport & Trip Management',
