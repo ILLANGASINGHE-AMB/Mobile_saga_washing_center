@@ -373,8 +373,10 @@
     .login-card {
       background: #fff;
       border-radius: 24px;
-      padding: 48px 42px 40px;
+      padding: 40px 32px 32px;
       width: 420px;
+      max-width: 92vw;
+      box-sizing: border-box;
       box-shadow: 0 32px 80px rgba(0,0,0,0.28);
       position: relative; z-index:1;
     }
@@ -524,6 +526,30 @@
 
     /* Responsive & Mobile Optimization */
     @media (max-width: 768px) {
+      /* Mobile Login Screen Fix */
+      #login-screen {
+        padding: 16px !important;
+        min-height: 100vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+      .login-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 28px 20px 24px !important;
+        border-radius: 20px !important;
+        box-sizing: border-box !important;
+      }
+      .login-card input {
+        font-size: 16px !important;
+        height: 46px !important;
+      }
+      #login-screen .btn-signin {
+        height: 48px !important;
+      }
+
       html, body {
         overflow-x: hidden !important;
         width: 100% !important;
@@ -1155,75 +1181,75 @@
         </div>
         <div class="mobile-more-grid">
           <!-- Dashboard / Home -->
-          <a href="#" onclick="mobileMoreSelect('dashboard')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('dashboard')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"><i class="fas fa-chart-pie"></i></div>
             <span>Dashboard</span>
-          </a>
+          </button>
           <!-- Customers -->
-          <a href="#" onclick="mobileMoreSelect('customers')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('customers')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#10b981,#047857);"><i class="fas fa-hotel"></i></div>
             <span>Customers</span>
-          </a>
+          </button>
           <!-- Transport -->
-          <a href="#" onclick="mobileMoreSelect('transport')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('transport')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-truck-fast"></i></div>
             <span>Transport</span>
-          </a>
+          </button>
           <!-- Orders -->
-          <a href="#" onclick="mobileMoreSelect('orders')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('orders')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);"><i class="fas fa-boxes-stacked"></i></div>
             <span>Orders</span>
-          </a>
+          </button>
           <!-- Pay Now -->
-          <a href="#" onclick="mobileMoreSelect('paynow')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('paynow')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490);"><i class="fas fa-money-bill-wave"></i></div>
             <span>Pay Now</span>
-          </a>
+          </button>
           <!-- Invoices -->
-          <a href="#" onclick="mobileMoreSelect('invoices')" class="mmode-card" id="mmode-invoices">
+          <button type="button" onclick="mobileMoreSelect('invoices')" class="mmode-card" id="mmode-invoices">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#ec4899,#be185d);"><i class="fas fa-file-invoice"></i></div>
             <span>Invoices</span>
-          </a>
+          </button>
           <!-- Deductions -->
-          <a href="#" onclick="mobileMoreSelect('deductions')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('deductions')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#f97316,#c2410c);"><i class="fas fa-scissors"></i></div>
             <span>Deductions</span>
-          </a>
+          </button>
           <!-- Items -->
-          <a href="#" onclick="mobileMoreSelect('items')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('items')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#6366f1,#4338ca);"><i class="fas fa-list-check"></i></div>
             <span>Items</span>
-          </a>
+          </button>
           <!-- Expenses -->
-          <a href="#" onclick="mobileMoreSelect('expenses')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('expenses')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#14b8a6,#0f766e);"><i class="fas fa-receipt"></i></div>
             <span>Expenses</span>
-          </a>
+          </button>
           <!-- Drivers -->
-          <a href="#" onclick="mobileMoreSelect('drivers')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('drivers')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#64748b,#334155);"><i class="fas fa-truck"></i></div>
             <span>Drivers</span>
-          </a>
+          </button>
           <!-- Data Analytics -->
-          <a href="#" onclick="mobileMoreSelect('analytics')" class="mmode-card" id="mmode-analytics">
+          <button type="button" onclick="mobileMoreSelect('analytics')" class="mmode-card" id="mmode-analytics">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#3b82f6,#1e40af);"><i class="fas fa-chart-line"></i></div>
             <span>Analytics</span>
-          </a>
+          </button>
           <!-- Reports -->
-          <a href="#" onclick="mobileMoreSelect('reports')" class="mmode-card" id="mmode-reports">
+          <button type="button" onclick="mobileMoreSelect('reports')" class="mmode-card" id="mmode-reports">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#8b5cf6,#4c1d95);"><i class="fas fa-chart-bar"></i></div>
             <span>Reports</span>
-          </a>
+          </button>
           <!-- Recent Actions -->
-          <a href="#" onclick="mobileMoreSelect('recent-actions')" class="mmode-card" id="mmode-recent-actions">
+          <button type="button" onclick="mobileMoreSelect('recent-actions')" class="mmode-card" id="mmode-recent-actions">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#a855f7,#7e22ce);"><i class="fas fa-history"></i></div>
             <span>Audit Log</span>
-          </a>
+          </button>
           <!-- Settings -->
-          <a href="#" onclick="mobileMoreSelect('settings')" class="mmode-card">
+          <button type="button" onclick="mobileMoreSelect('settings')" class="mmode-card">
             <div class="mmode-icon" style="background:linear-gradient(135deg,#475569,#1e293b);"><i class="fas fa-cog"></i></div>
             <span>Settings</span>
-          </a>
+          </button>
         </div>
         <div style="margin-top:8px;">
           <button onclick="doLogout(); closeMobileMoreMenu();" class="btn btn-danger" style="width:100%; justify-content:center; padding:12px; font-size:0.95em;">
