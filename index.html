@@ -527,7 +527,7 @@
     /* Responsive & Mobile Optimization */
     @media (max-width: 768px) {
       /* Mobile Login Screen Fix */
-      #login-screen {
+      #login-screen:not([style*="display: none"]):not([style*="display:none"]) {
         padding: 16px !important;
         min-height: 100vh !important;
         min-height: 100dvh !important;
@@ -535,6 +535,9 @@
         align-items: center !important;
         justify-content: center !important;
         box-sizing: border-box !important;
+      }
+      #login-screen[style*="display: none"], #login-screen[style*="display:none"] {
+        display: none !important;
       }
       .login-card {
         width: 100% !important;
